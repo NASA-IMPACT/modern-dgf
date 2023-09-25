@@ -376,7 +376,7 @@ How to use the mDGF?
     -   *More specific details on the automation recommendations will be
         > provided in upcoming versions of the mDGF.*
 
--   Use this &lt;&lt;&lt; ASHISH - Github Cookie Cutter &gt;&gt; to
+-   Use [cookiecutter-mdgf](https://github.com/NASA-IMPACT/cookiecutter-mdgf) to
     > tailor it for your individual project
 
     -   Select the entities (and constraints) applicable to your project
