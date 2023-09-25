@@ -352,7 +352,7 @@ high-level in a tabulated way:
 
 Or as a 3-dimensional diagram:
 
-<img src="media/image3.jpg" style="width:5.625in;height:3.14733in" />
+<img src="_images/image2.jpg" style="width:5.625in;height:3.14733in" />
 
 How to use the mDGF?
 --------------------

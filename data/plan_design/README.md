@@ -12,7 +12,7 @@
 <tr class="odd">
 <td>A1.1.1 Define a data flow diagram with the purpose of identifying data sources and touchpoints for the project and for communicating to data users how data was handled.</td>
 <td><p>B1.1.1 Create a data flow diagram extending from acquisition/creation to user delivery and add diagram to DMP. [DE]</p>
-<p>Example diagram: <img src="media/image1.png" style="width:3.10417in;height:1.55556in" /></p></td>
+<p>Example diagram: <img src="_images/image1.png" style="width:3.10417in;height:1.55556in" /></p></td>
 </tr>
 <tr class="even">
 <td>A1.1.2 Develop touchpoint agreements identified in the data flow diagram</td>
