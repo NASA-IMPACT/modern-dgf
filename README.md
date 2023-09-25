@@ -393,3 +393,14 @@ How to use the mDGF?
         -   Document which will serve as your DMP
 
         -   Github into your project repo as cards
+
+```
+@misc{modern-DGF,
+    author          = {Ramachandran, Rahul and Bugbee, Kaylin and Kaulfus, Aaron and LeRuex, Jeanne and Peng, Ge and Smith, Deborah and Christman, Jerika},
+    doi             = {},
+    month           = sept,
+    title           = {{Mordern Data Govenance Framework}},
+    repository-code = {https://github.com/nasa-impact/modern-dgf},
+    year            = {2023}
+}
+```
