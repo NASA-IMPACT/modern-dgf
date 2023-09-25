@@ -294,7 +294,7 @@ high-level in a tabulated way:
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>1. [Data](data)</strong></td>
+<td><strong>1 Data</strong></td>
 <td>1.1</td>
 <td>1.2</td>
 <td>1.3</td>
@@ -303,7 +303,7 @@ high-level in a tabulated way:
 <td>1.6</td>
 </tr>
 <tr class="even">
-<td><strong>2. [Metadata](metadata)</strong></td>
+<td><strong>2 Metadata</strong></td>
 <td>2.1</td>
 <td>..</td>
 <td>..</td>
@@ -312,7 +312,7 @@ high-level in a tabulated way:
 <td>..</td>
 </tr>
 <tr class="odd">
-<td><strong>3. [Digital Content](digital_content)</strong></td>
+<td><strong>3 Digital Content</strong></td>
 <td>3.1</td>
 <td>..</td>
 <td>..</td>
@@ -321,7 +321,7 @@ high-level in a tabulated way:
 <td>..</td>
 </tr>
 <tr class="even">
-<td><strong>4. [Code](code)</strong></td>
+<td><strong>4 Code</strong></td>
 <td>4.1</td>
 <td>..</td>
 <td>..</td>
@@ -330,7 +330,7 @@ high-level in a tabulated way:
 <td>..</td>
 </tr>
 <tr class="odd">
-<td><strong>5. [Storage](resources/storage)</strong></td>
+<td><strong>5 Storage</strong></td>
 <td>5.1</td>
 <td>..</td>
 <td>..</td>
@@ -339,7 +339,7 @@ high-level in a tabulated way:
 <td>..</td>
 </tr>
 <tr class="even">
-<td><strong>6. [People](resources/people)</strong></td>
+<td><strong>6 People</strong></td>
 <td>6.1</td>
 <td>..</td>
 <td>..</td>
