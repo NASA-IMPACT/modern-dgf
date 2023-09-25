@@ -28,6 +28,12 @@ International</span>](https://creativecommons.org/licenses/by/4.0/legalcode)
 license. When using or reusing the framework, please provide attribution
 to this repository.
 
+Remaining Things to do
+======================
+1. Add contribution process 
+2. Fix typographic issues.
+
+
 Introduction
 ============
 
