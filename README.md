@@ -30,8 +30,8 @@ to this repository.
 
 Remaining Things to do
 ======================
-1. Add contribution process 
-2. Fix typographic issues.
+1. Reduce "Procedures or management tasks" by removing tasks that have low return on effort (ROE) and are not essential 
+2. Develop tools and services to automate procedures as well as monitoring of the entire governance process
 
 
 Introduction
