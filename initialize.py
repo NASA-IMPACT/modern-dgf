@@ -1,10 +1,18 @@
-from typing import Optional
-from rich.console import Console
-from rich.table import Table
-from rich.prompt import Prompt
-from rich import print
+from typing import Optional, List
+
+try:
+    from typing import Literal
+    from typing import Annotated
+except ImportError:
+    from typing_extensions import Literal
+    from typing_extensions import Annotated
 
 import typer
+from rich import print
+from rich.console import Console
+from rich.prompt import Prompt
+from rich.table import Table
+from enum import Enum
 
 app = typer.Typer(
     help="CLI to tailor the mDGF framework to your project-specific needs."
@@ -40,6 +48,52 @@ Example input: 1, 2.3, 2.4, 2.5, -3.2, 6.1
 """
 
 
+class ValidCodeOptions(Enum):
+    OPTION_all = "all"
+    OPTION_1 = "1"
+    OPTION_2 = "2"
+    OPTION_3 = "3"
+    OPTION_4 = "4"
+    OPTION_5 = "5"
+    OPTION_6 = "6"
+    OPTION_1_1 = "1.1"
+    OPTION_1_2 = "1.2"
+    OPTION_1_3 = "1.3"
+    OPTION_1_4 = "1.4"
+    OPTION_1_5 = "1.5"
+    OPTION_1_6 = "1.6"
+    OPTION_2_1 = "2.1"
+    OPTION_2_2 = "2.2"
+    OPTION_2_3 = "2.3"
+    OPTION_2_4 = "2.4"
+    OPTION_2_5 = "2.5"
+    OPTION_2_6 = "2.6"
+    OPTION_3_1 = "3.1"
+    OPTION_3_2 = "3.2"
+    OPTION_3_3 = "3.3"
+    OPTION_3_4 = "3.4"
+    OPTION_3_5 = "3.5"
+    OPTION_3_6 = "3.6"
+    OPTION_4_1 = "4.1"
+    OPTION_4_2 = "4.2"
+    OPTION_4_3 = "4.3"
+    OPTION_4_4 = "4.4"
+    OPTION_4_5 = "4.5"
+    OPTION_4_6 = "4.6"
+    OPTION_5_1 = "5.1"
+    OPTION_5_2 = "5.2"
+    OPTION_5_3 = "5.3"
+    OPTION_5_4 = "5.4"
+    OPTION_5_5 = "5.5"
+    OPTION_5_6 = "5.6"
+    OPTION_6_1 = "6.1"
+
+
+def is_valid(code: str) -> bool:
+    parts = code.split(",")
+    return all(part in ValidCodeOptions._value2member_map_ for part in parts)
+
+
 def _get_table():
     table = Table("Entities \u2193 / Activities \u2192", *ACTIVITIES)
 
@@ -67,6 +121,10 @@ def wizard():
 
     console.print(_get_table())
     options_selected = Prompt.ask(PROMPT, default="all")
+    while not is_valid(options_selected):
+        options_selected = Prompt.ask(
+            "Invalid input. Please enter a valid input.\n", default="all"
+        )
     print(options_selected)
 
 
