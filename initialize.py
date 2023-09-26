@@ -94,6 +94,11 @@ def is_valid(code: str) -> bool:
     return all(part in ValidCodeOptions._value2member_map_ for part in parts)
 
 
+def parse_options(code: str) -> List[str]:
+    parts = code.split(",")
+    return [part for part in parts if part in ValidCodeOptions._value2member_map_]
+
+
 def _get_table():
     table = Table("Entities \u2193 / Activities \u2192", *ACTIVITIES)
 
@@ -125,6 +130,7 @@ def wizard():
         options_selected = Prompt.ask(
             "Invalid input. Please enter a valid input.\n", default="all"
         )
+    options_selected = parse_options(options_selected)
     print(options_selected)
 
 
