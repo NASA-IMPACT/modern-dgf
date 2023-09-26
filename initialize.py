@@ -1,18 +1,17 @@
-from typing import Optional, List
+from typing import List, Optional
 
 try:
-    from typing import Literal
-    from typing import Annotated
+    from typing import Annotated, Literal
 except ImportError:
-    from typing_extensions import Literal
-    from typing_extensions import Annotated
+    from typing_extensions import Annotated, Literal
+
+from enum import Enum
 
 import typer
 from rich import print
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
-from enum import Enum
 
 app = typer.Typer(
     help="CLI to tailor the mDGF framework to your project-specific needs."
