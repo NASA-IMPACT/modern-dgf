@@ -22,27 +22,9 @@ ACTIVITIES = [
     "6. Monitoring",
 ]
 
+PROMPT = """Please enter codes for documents relevant to your project. All other documents will be deselected.
 
-@app.command()
-def wizard():
-    """
-    Answer some simple questions to tailor the mDGF framework to your project.
-    """
-    table = Table("Entities \u2193 / Activities \u2192", *ACTIVITIES)
-
-    for index, entity in enumerate(ENTITIES):
-        index += 1
-        if entity == "People":
-            codes = ["6.1"]
-        else:
-            codes = [f"{index}.{subindex}" for subindex in range(1, 7)]
-        table.add_row(f"{index}. {entity}", *codes)
-
-    console.print(table)
-    options_selected = Prompt.ask(
-        """Please enter codes for relevant documents to your project. All other documents will be deselected.
-
-Select all documents for all entities by typing in "all".
+Select all documents for all entities by typing in "all". This is the default option.
 
 Select all documents for an entity by typing in a whole number. For example, 1 will select all documents for the entity "Data".
 
@@ -54,8 +36,37 @@ Deselect a document by typing in a negative number. For example, -1 will deselec
 
 Example input: all
 Example input: 1, 2.3, 2.4, 2.5, -3.2, 6.1
-        """,
+
+"""
+
+
+def _get_table():
+    table = Table("Entities \u2193 / Activities \u2192", *ACTIVITIES)
+
+    for index, entity in enumerate(ENTITIES):
+        index += 1
+        if entity == "People":
+            codes = ["6.1"]
+        else:
+            codes = [f"{index}.{subindex}" for subindex in range(1, 7)]
+        table.add_row(f"{index}. {entity}", *codes)
+    return table
+
+
+@app.command()
+def wizard():
+    """
+    Answer some simple questions to tailor the mDGF framework to your project.
+    """
+
+    welcome_message = typer.style(
+        "\nWelcome to the mDGF framework wizard!\n", fg=typer.colors.GREEN, bold=True
     )
+    typer.echo(welcome_message)
+    typer.echo("Below you will find a table of all documents in the mDGF framework.\n")
+
+    console.print(_get_table())
+    options_selected = Prompt.ask(PROMPT, default="all")
     print(options_selected)
 
 
