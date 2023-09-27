@@ -24,7 +24,7 @@
 <td><p>B4.3.3a Include a read me document that describes the purpose of the code and any system requirements [DE]</p>
 <p>B4.3.3b Include a brief ‘About’ description of the code that will be displayed towards the top of the repo page. The description should be no more than 325 characters or 50 words. [DS]</p>
 <blockquote>
-<p>Example ‘About’ text.<img src="media/image2.png" style="width:2.61458in;height:2.41667in" /></p>
+<p>Example ‘About’ text.<img src="_images/image.png" style="width:2.61458in;height:2.41667in" /></p>
 </blockquote></td>
 </tr>
 </tbody>

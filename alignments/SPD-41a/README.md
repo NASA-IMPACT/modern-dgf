@@ -80,11 +80,7 @@ from the SPD-41 document\]
 <tr class="odd">
 <td><ul>
 <li><blockquote>
-<p>If there are no other restrictions, publicly available SMD-funded software should</p>
-</blockquote></li>
-</ul>
-<blockquote>
-<p>be released under a permissive license that has broad acceptance in the community [III.D.iii]</p>
+<p>If there are no other restrictions, publicly available SMD-funded software should be released under a permissive license that has broad acceptance in the community [III.D.iii]</p>
 </blockquote></td>
 <td>A4.1.3</td>
 </tr>
