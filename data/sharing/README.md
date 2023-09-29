@@ -10,7 +10,9 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>A1.3.1 Ensure data product identifiers are resolvable</td>
+<td>
+    A1.3.1 Ensure data product identifiers are resolvable
+</td>
 <td><p>B1.3.1a Check that the persistent identifier for the data resolves to the appropriate dataset landing page (see A3.1.1) The persistent identifier should be found somewhere on the landing page, but is ideally embedded in schema.org markup such as JSON-LD and/or using HTML meta tags. [DE]</p>
 <p>Example schema.org/JSON-LD:</p>
 <p>&lt;application type=&quot;application/ld+json&quot;&gt;</p>
@@ -29,9 +31,7 @@
 <p>&lt;p&gt;All content on this site is licensed under</p>
 <p>&lt;a property=&quot;https://creativecommons.org/ns#license&quot;</p>
 <p>href=&quot;https://creativecommons.org/licenses/by/4.0/&quot;&gt;</p>
-</blockquote>
 <p>a Creative Commons License&lt;/a&gt;.&lt;/p&gt;</p>
-<blockquote>
 <p>…</p>
 </blockquote></td>
 </tr>
