@@ -1,7 +1,7 @@
 Modern Scientific Data Governance Framework
 ===========================================
 
-V0.1
+[V0.1](https://docs.google.com/document/d/1Z8SyGApfoBbfhLRRQKqx_ZLlgSuAAWicVImzfJbiPDY/edit?usp=sharing)
 
 September 2023
 
