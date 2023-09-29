@@ -346,6 +346,16 @@ How to use the mDGF?
     
     -   Subselection prepared as a document which will serve as your DMP
 
+## Contribution
+
+If you want to contribute to the mDGF, please follow the following steps:
+
+-   Fork the repo
+-   Make the changes
+-   Send a pull request against https://github.com/nasa-impact/modern-DGF. 
+    -   Pull requests should have detailed list of changes.
+-   The core team will review the changes and approve/deny the request.
+
 
 ```
 @misc{modern-DGF,
