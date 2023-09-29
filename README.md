@@ -340,13 +340,12 @@ How to use the mDGF?
 
     > GitHub Auth Key can be obtained via [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
--   Perform a quick compliance check against the different policies (SPD-41a, FAIR) using Artificial Intelligence.
+- Coming Next week
 
--   Export the subset as:
+    -   Perform a quick compliance check against the different policies (SPD-41a, FAIR) using Artificial Intelligence (Coming Next week).
+    
+    -   Subselection prepared as a document which will serve as your DMP
 
-    -   Document which will serve as your DMP
-
-    -   Github into your project repo as cards
 
 ```
 @misc{modern-DGF,
