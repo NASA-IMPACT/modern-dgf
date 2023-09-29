@@ -362,7 +362,7 @@ If you want to contribute to the mDGF, please follow the following steps:
     author          = {Ramachandran, Rahul and Bugbee, Kaylin and Kaulfus, Aaron and Le Roux, Jeanne and Peng, Ge and Smith, Deborah and Christman, Jerika},
     doi             = {10.5281/zenodo.8393144},
     month           = sept,
-    title           = {{Mordern Data Govenance Framework}},
+    title           = {{Mordern Data Governance Framework}},
     repository-code = {https://github.com/nasa-impact/modern-dgf},
     year            = {2023}
 }
