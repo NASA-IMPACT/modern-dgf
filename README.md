@@ -333,6 +333,7 @@ How to use the mDGF?
 ## Work in progress
         
 -   Additonally, you can also choose to create github issues based on the selections made. Additional parameters are required for github issues to be created.
+        
         > `GITHUB_REPO=<new GitHub Repo name> GITHUB_OWNER=<organization/user handle> GITHUB_AUTH_KEY=<GitHub Authorization Key> python initialize.py`
     
         > GitHub Auth Key can be obtained via [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
