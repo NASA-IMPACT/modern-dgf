@@ -298,7 +298,8 @@ How to use the mDGF?
     -   Fork this repository via github
         > [Fork Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
         > Please make sure you select appropriate GitHub organization for your fork. You can rename the fork as needed.
-        > Insert images here. 
+        > <img src="_images/fork.png" style="width:5.625in;height:3.14733in" />
+        > <img src="_images/rename-fork.png" style="width:5.625in;height:3.14733in" />
     
     -   Customize the framework for your project
 
@@ -317,6 +318,7 @@ How to use the mDGF?
             -   Select the entities (and constraints) applicable to your project
 
             -   Select the data life cycle phases that apply to your project. Remember Foundational Phases are recommended as mandatory requirements. `
+            > <img src="_images/selections.png" style="width:5.625in;height:3.14733in" />
         
         -   Once customized, only selected folders and documents will remain in the repo. You will need to push the changes to your GitHub repo.
             > `git commit -am '<Your commit message>'`. Please replace `<Your commit message>` with appropriate messaging.
