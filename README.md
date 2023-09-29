@@ -340,7 +340,7 @@ How to use the mDGF?
 
     > GitHub Auth Key can be obtained via [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
--   Perform a quick compliance check against the different policies (SPD-41a, FAIR) etc.
+-   Perform a quick compliance check against the different policies (SPD-41a, FAIR) using Artificial Intelligence.
 
 -   Export the subset as:
 
