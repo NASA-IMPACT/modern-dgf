@@ -293,15 +293,38 @@ How to use the mDGF?
 
     -   *More specific details on the automation recommendations will be provided in upcoming versions of the mDGF.*
 
--   Use [cookiecutter-mdgf](https://github.com/NASA-IMPACT/cookiecutter-mdgf) to tailor it for your individual project
+-   Follow the following steps to customize the framework for your project:
 
-    -   Select the entities (and constraints) applicable to your project
-
-    -   Select the data life cycle phases that apply to your project. Remember Foundational Phases are recommended as mandatory requirements.
-
-    -   Performance a quick compliance check against the different policies (SPD-41a, FAIR) etc.
+    -   Fork this repository via github
+        > [Fork Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+        > Please make sure you select appropriate GitHub organization for your fork. You can rename the fork as needed.
+        > Insert images here. 
     
-    -   Export the subset as:
+    -   Customize the framework for your project
+
+        -   Clone the repository locally
+            > [Clone repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
+        -   Navigate to the location where the repository is cloned using your terminal:
+            > `cd <clone location>`
+        
+        -   Run `pip install -r requirements.txt` to install all the required packages. 
+            > This assumes a working installation of pip and python in your computer. If you do not have `python` installed, you can use [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html) or other installers to install it.
+        
+        -   Run `python initialize.py` to start customizing the framework for your project
+            > This will initiate a guided setup process.
+
+            -   Select the entities (and constraints) applicable to your project
+
+            -   Select the data life cycle phases that apply to your project. Remember Foundational Phases are recommended as mandatory requirements. `
+        
+        -   Once customized, only selected folders and documents will remain in the repo. You will need to push the changes to your GitHub repo.
+            > `git commit -am '<Your commit message>'`. Please replace `<Your commit message>` with appropriate messaging.
+            > `git push origin main`. This will push your changes into GitHub. However, it is highly recommended to use branches and Pull requests to make any changes. [Read more.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+
+    -   Performance a quick compliance check against the different policies (SPD-41a, FAIR) etc. (Work in Progress)
+    
+    -   Export the subset as (Work in Progress):
 
         -   Document which will serve as your DMP
 
@@ -317,3 +340,11 @@ How to use the mDGF?
     year            = {2023}
 }
 ```
+
+
+1. Snapshots
+2. Update script to handle requests properly (foundational elements etc)
+3. Update readme
+    1. Workflow for setup
+4. github process (alt)
+5. 
