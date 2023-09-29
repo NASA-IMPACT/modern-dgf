@@ -328,7 +328,7 @@ How to use the mDGF?
             
             > `git push origin main`. This will push your changes into GitHub. However, it is highly recommended to use branches and Pull requests to make any changes. [Read more.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
         
-    -   Additonally, you can also choose to create github issues based on the selections made. Additional parameters are required for github issues to be created.
+    -   Additonally, you can also choose to create github issues based on the selections made. Additional parameters are required for github issues to be created. (Work in Progress)
         > `GITHUB_REPO=<new GitHub Repo name> GITHUB_OWNER=<organization/user handle> GITHUB_AUTH_KEY=<GitHub Authorization Key> python initialize.py`
     
         > GitHub Auth Key can be obtained via [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
