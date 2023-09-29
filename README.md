@@ -297,8 +297,11 @@ How to use the mDGF?
 
     -   Fork this repository via github
         > [Fork Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+        
         > Please make sure you select appropriate GitHub organization for your fork. You can rename the fork as needed.
+        
         > <img src="_images/fork.png" style="width:5.625in;height:3.14733in" />
+        
         > <img src="_images/rename-fork.png" style="width:5.625in;height:3.14733in" />
     
     -   Customize the framework for your project
@@ -322,7 +325,13 @@ How to use the mDGF?
         
         -   Once customized, only selected folders and documents will remain in the repo. You will need to push the changes to your GitHub repo.
             > `git commit -am '<Your commit message>'`. Please replace `<Your commit message>` with appropriate messaging.
+            
             > `git push origin main`. This will push your changes into GitHub. However, it is highly recommended to use branches and Pull requests to make any changes. [Read more.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+        
+    -   Additonally, you can also choose to create github issues based on the selections made. Additional parameters are required for github issues to be created.
+        > `GITHUB_REPO=<new GitHub Repo name> GITHUB_OWNER=<organization/user handle> GITHUB_AUTH_KEY=<GitHub Authorization Key> python initialize.py`
+    
+        > GitHub Auth Key can be obtained via [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
     -   Performance a quick compliance check against the different policies (SPD-41a, FAIR) etc. (Work in Progress)
     
@@ -342,11 +351,3 @@ How to use the mDGF?
     year            = {2023}
 }
 ```
-
-
-1. Snapshots
-2. Update script to handle requests properly (foundational elements etc)
-3. Update readme
-    1. Workflow for setup
-4. github process (alt)
-5. 

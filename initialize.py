@@ -1,5 +1,8 @@
+import json
+import os
 import shutil
 import typer
+import requests
 import shutil
 
 from enum import Enum
@@ -27,6 +30,8 @@ ENTITIY_FOLDERS = ['data', 'metadata', 'digital_content', 'code', 'resources/sto
 ENTITIES_PROMPT = "Provide the comma separated IDs of entities applicable to your project:"
 
 FOUNDATIONAL_CODES = [1, 6]
+
+GITHUB_URL = 'https://api.github.com/repos/{owner}/{repo_name}/issues'
 
 INFO = """There are two steps to customizing the framework for your project. 
 1. Selection of entities applicable to your project
@@ -132,6 +137,31 @@ def _get_table():
         table.add_row(f"{index}. {entity}", *codes)
     return table
 
+def make_github_issue(title: str):
+    '''Create an issue on github using the given parameters.'''
+    auth_key = os.environ.get('GITHUB_AUTH_KEY')
+    if not(auth_key):
+        return
+    owner = os.environ.get('GITHUB_OWNER')
+    repo_name = os.environ.get('GITHUB_REPO')
+
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {auth_key}",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    # Create our issue
+    issue = {
+        'title': title,
+        'body': title,
+    }
+    # Add the issue to our repository
+    response = requests.post(GITHUB_URL.format(owner, repo_name), headers=headers, data=json.dumps(issue))
+    if response.status_code == 201:
+        print(f"Successfully created Issue {title}")
+    else:
+        print(f"Could not create Issue {title}")
+
 def prepare_directories(valid_entities_and_phases: dict):
     for entity_code, entity in enumerate(ENTITIY_FOLDERS, 1):
         if phases := valid_entities_and_phases.get(f"{entity_code}"):
@@ -140,7 +170,8 @@ def prepare_directories(valid_entities_and_phases: dict):
                 if entity_code == int(ValidCodeOptions.OPTION_6.value) and phase_index > 1:
                     continue
                 if f"{entity_code}.{phase_index}" in phases:
-                    console.print(f"    Keep Phase: {phase}")    
+                    console.print(f"    Keep Phase: {phase}")
+                    make_github_issue("Ensure compliance for entity: {entity}, phase: {phase}")
                 else:
                     console.print(f"    Remove Phase: {phase}")
                     shutil.rmtree(f'{entity}/{phase}')
