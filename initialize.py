@@ -1,17 +1,18 @@
+import shutil
+import typer
+import shutil
+
+from enum import Enum
+from rich import print
+from rich.console import Console
+from rich.prompt import Prompt
+from rich.table import Table
 from typing import List, Optional
 
 try:
     from typing import Annotated, Literal
 except ImportError:
     from typing_extensions import Annotated, Literal
-
-from enum import Enum
-
-import typer
-from rich import print
-from rich.console import Console
-from rich.prompt import Prompt
-from rich.table import Table
 
 app = typer.Typer(
     help="CLI to tailor the mDGF framework to your project-specific needs."
@@ -20,31 +21,38 @@ app = typer.Typer(
 console = Console()
 
 ENTITIES = ["Data", "Metadata", "Digital Content", "Code", "Storage", "People"]
-ACTIVITIES = [
-    "1. Plan/Design",
-    "2. Gen/Curation",
-    "3. Sharing",
-    "4. Use/Reuse",
-    "5. Preservation",
-    "6. Monitoring",
-]
 
-PROMPT = """Please enter codes for documents relevant to your project. All other documents will be deselected.
+ENTITIY_FOLDERS = ['data', 'metadata', 'digital_content', 'code', 'resources/storage', 'resources/people']
 
-Select all documents for all entities by typing in "all". This is the default option.
+ENTITIES_PROMPT = "Provide the comma separated IDs of entities applicable to your project:"
 
-Select all documents for an entity by typing in a whole number. For example, 1 will select all documents for the entity "Data".
+FOUNDATIONAL_CODES = [1, 6]
 
-Select individual documents by typing in a decimal number. For example, 1.1 will select the first activity for the entity "Data".
+INFO = """There are two steps to customizing the framework for your project. 
+1. Selection of entities applicable to your project
+2. Selection of phases for selected entities 
 
-Select multiple documents by typing in a comma-separated list of numbers.
+Note: Only selected entities and phases will be retained, everything else will be removed from the repo.
 
-Deselect a document by typing in a negative number. For example, -1 will deselect all documents for the entity "Data". -2.1 will Deselct the first document for the entity "Metadata".
+Instructions on selecting entities and phases:
+1. Select all documents for an entity by typing in a whole number. For example, 1 will select all documents for the entity "Data".
+2. Select individual phases by typing in a number between 1 and 6. For example, 1 will select the Plan/Design phase for the entity "Data", if you had selected 1 from the Entity list.
+3. Select multiple documents by typing in a comma-separated list of numbers.
 
-Example input: all
-Example input: 1, 2.3, 2.4, 2.5, -3.2, 6.1
-
+Note: Foundational Phases are selected by default.
 """
+
+PHASES = [
+    "Plan/Design",
+    "Generation/Curation",
+    "Sharing",
+    "Use/Reuse",
+    "Preservation",
+    "Monitoring",
+]
+PHASES_FOLDERS = ['plan_design', 'generation_curation', 'sharing', 'use_reuse', 'preservation', 'monitoring']
+
+PHASES_PROMPT = "Provide the IDs of Phases applicable to {entity}:"
 
 
 class ValidCodeOptions(Enum):
@@ -88,18 +96,32 @@ class ValidCodeOptions(Enum):
     OPTION_6_1 = "6.1"
 
 
-def is_valid(code: str) -> bool:
+def formatted_part(parts: list, entity_code: str = '') -> list:
+    if ValidCodeOptions.OPTION_all.value in parts:
+        # Change this to use ENUMs
+        parts = [str(index) for index in range(1, 7)]    
+    return [f'{entity_code}.{part.strip()}' if entity_code else part.strip() for part in parts]
+
+def is_valid(code: str, entity_code: str = '') -> bool:
+    parts = code.split(',')
+    val = [f"{entity_code}.{part.strip().replace('-', '')}" if entity_code else part.strip().replace('-', '') in ValidCodeOptions._value2member_map_ for part in parts]
+    return all(val)
+
+def parse_options(code: str, entity_code: str = '') -> List[str]:
     parts = code.split(",")
-    return all(part in ValidCodeOptions._value2member_map_ for part in parts)
+    return formatted_part(parts, entity_code)
 
+def prepare_final_phase_list(entity_code: str, phase_list: list) -> list:
+    required_phases = [f"{entity_code}.{foundational_code}" for foundational_code in FOUNDATIONAL_CODES]
+    final_phases = list(set(phase_list).union(set(required_phases)))
 
-def parse_options(code: str) -> List[str]:
-    parts = code.split(",")
-    return [part for part in parts if part in ValidCodeOptions._value2member_map_]
-
+    if entity_code == ValidCodeOptions.OPTION_6.value:
+        final_phases = [f"{entity_code}.{FOUNDATIONAL_CODES[0]}"]
+    
+    return final_phases
 
 def _get_table():
-    table = Table("Entities \u2193 / Activities \u2192", *ACTIVITIES)
+    table = Table("Entities \u2193 / Phases \u2192", *PHASES)
 
     for index, entity in enumerate(ENTITIES):
         index += 1
@@ -110,6 +132,19 @@ def _get_table():
         table.add_row(f"{index}. {entity}", *codes)
     return table
 
+def prepare_directories(valid_entities_and_phases: dict):
+    for entity_code, entity in enumerate(ENTITIY_FOLDERS, 1):
+        if phases := valid_entities_and_phases.get(f"{entity_code}"):
+            console.print(f"Keep Entity: {entity}" )
+            for phase_index, phase in enumerate(PHASES_FOLDERS, 1):
+                if f"{entity_code}.{phase_index}" in phases:
+                    console.print(f"    Keep Phase: {phase}")    
+                else:
+                    console.print(f"    Remove Phase: {phase}")
+                    shutil.rmtree(f'{entity}/{phase}')
+        else:
+            console.print(f"Remove Entity: {entity}" )
+            shutil.rmtree(entity)
 
 @app.command()
 def wizard():
@@ -118,20 +153,42 @@ def wizard():
     """
 
     welcome_message = typer.style(
-        "\nWelcome to the mDGF framework wizard!\n", fg=typer.colors.GREEN, bold=True
+        "\nWelcome to the Modern Data Governance framework wizard!\n", fg=typer.colors.GREEN, bold=True
     )
     typer.echo(welcome_message)
-    typer.echo("Below you will find a table of all documents in the mDGF framework.\n")
+    
+    information = typer.style(
+        INFO, fg=typer.colors.YELLOW
+    )
+
+    typer.echo(information)
+
+    typer.echo("Below you will find a table of all steps in the mDGF framework.\n")
 
     console.print(_get_table())
-    options_selected = Prompt.ask(PROMPT, default="all")
-    while not is_valid(options_selected):
-        options_selected = Prompt.ask(
-            "Invalid input. Please enter a valid input.\n", default="all"
-        )
-    options_selected = parse_options(options_selected)
-    print(options_selected)
+    
+    entities_selected = Prompt.ask(ENTITIES_PROMPT, default="all")
 
+    print(entities_selected)
+
+    while not is_valid(entities_selected):
+        entities_selected = Prompt.ask(
+            "Invalid selection. Please enter values listed in the table above.\n", default="all"
+        )
+
+    valid_entities = parse_options(entities_selected)
+
+    valid_entities_and_phases = dict()
+    for entity in valid_entities:
+        phases_selected = Prompt.ask(PHASES_PROMPT.format(entity=entity), default="all")
+        while not is_valid(phases_selected, entity):
+            phases_selected = Prompt.ask(
+                f"Invalid selection. Please enter proper for phases of {entity} listed in the table above.\n", default="all"
+            )
+        phase_list = prepare_final_phase_list(entity, parse_options(phases_selected, entity))
+        valid_entities_and_phases[entity] = phase_list
+    print(valid_entities_and_phases)
+    prepare_directories(valid_entities_and_phases)
 
 if __name__ == "__main__":
     app()
