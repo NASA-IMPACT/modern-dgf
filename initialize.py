@@ -137,6 +137,8 @@ def prepare_directories(valid_entities_and_phases: dict):
         if phases := valid_entities_and_phases.get(f"{entity_code}"):
             console.print(f"Keep Entity: {entity}" )
             for phase_index, phase in enumerate(PHASES_FOLDERS, 1):
+                if entity_code == int(ValidCodeOptions.OPTION_6.value) and phase_index > 1:
+                    continue
                 if f"{entity_code}.{phase_index}" in phases:
                     console.print(f"    Keep Phase: {phase}")    
                 else:
