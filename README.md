@@ -297,6 +297,8 @@ How to use the mDGF?
 
 -   Follow the following steps to customize the framework for your project:
 
+<img src="_images/overview.png" style="width:5.925in;height:3.14733in" />
+
     -   Fork this repository via github
         > [Fork Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
         
