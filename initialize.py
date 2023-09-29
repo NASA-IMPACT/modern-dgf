@@ -44,7 +44,7 @@ Instructions on selecting entities and phases:
 2. Select individual phases by typing in a number between 1 and 6. For example, 1 will select the Plan/Design phase for the entity "Data", if you had selected 1 from the Entity list.
 3. Select multiple documents by typing in a comma-separated list of numbers.
 
-Note: Foundational Phases are selected by default.
+Note: foundational phases are selected by default.
 """
 
 PHASES = [

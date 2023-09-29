@@ -283,7 +283,7 @@ Or as a 3-dimensional diagram:
 How to use the mDGF?
 --------------------
 
--   Review and understand the structure and the numbering system for each section. The high-level sections are organized by core entities (data, metadata, digital content and code) and resources (storage and people). Each section is broken down by foundational and data lifecycle activities (planning, monitoring, etc…).
+-   Review and understand the structure and the numbering system for each section. The high-level sections are organized by core entities (data, metadata, digital content and code) and resources (storage and people). Each section is broken down by foundational and data lifecycle activities (planning, monitoring, etc.).
 
 <!-- -->
 
@@ -299,7 +299,7 @@ How to use the mDGF?
 
     <img src="_images/overview.png" style="width:5.925in;height:3.14733in" />
 
-    -   Fork this repository via github
+    -   Fork this repository via GitHub
         > [Fork Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
         
         > Please make sure you select appropriate GitHub organization for your fork. You can rename the fork as needed.
@@ -324,17 +324,17 @@ How to use the mDGF?
 
             -   Select the entities (and constraints) applicable to your project
 
-            -   Select the data life cycle phases that apply to your project. Remember Foundational Phases are recommended as mandatory requirements. `
+            -   Select the data life cycle phases that apply to your project. Remember foundational phases are recommended as mandatory requirements. `
             > <img src="_images/selections.png" style="width:5.625in;height:3.14733in" />
         
         -   Once customized, only selected folders and documents will remain in the repo. You will need to push the changes to your GitHub repo.
             > `git commit -am '<Your commit message>'`. Please replace `<Your commit message>` with appropriate messaging.
             
-            > `git push origin main`. This will push your changes into GitHub. However, it is highly recommended to use branches and Pull requests to make any changes. [Read more.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+            > `git push origin main`. This will push your changes into GitHub. However, it is highly recommended to use branches and pull requests to make any changes. [Read more.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
 ## Work in progress
         
--   Additonally, you can also choose to create github issues based on the selections made. Additional parameters are required for github issues to be created.
+-   Additonally, you can also choose to create GitHub issues based on the selections made. Additional parameters are required for GitHub issues to be created.
         
     > `GITHUB_REPO=<new GitHub Repo name> GITHUB_OWNER=<organization/user handle> GITHUB_AUTH_KEY=<GitHub Authorization Key> python initialize.py`
 
