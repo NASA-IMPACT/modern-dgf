@@ -30,7 +30,7 @@ to this repository.
 
 Remaining Things to do
 ======================
-1. Reduce "Procedures or management tasks" by removing tasks that have low return on effort (ROE) and are not essential 
+1. Reduce "Implementation Procedures (actual tasks)" by removing tasks that have low return on effort (ROE) and are not essential 
 2. Develop tools and services to automate procedures as well as monitoring of the entire governance process
 3. Automated compliance checks
 
