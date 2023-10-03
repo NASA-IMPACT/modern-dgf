@@ -278,7 +278,7 @@ The mDGF structure and the numbering system can be summarized at the high-level 
 
 Or as a 3-dimensional diagram:
 
-<img src="_images/image2.jpg" style="width:5.625in;height:3.14733in" />
+<img src="_images/mDGF.png" style="width:5.625in;height:3.14733in" />
 
 How to use the mDGF?
 --------------------
