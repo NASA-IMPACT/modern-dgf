@@ -278,7 +278,7 @@ The mDGF structure and the numbering system can be summarized at the high-level 
 
 Or as a 3-dimensional diagram:
 
-<img src="_images/mDGF.jpg" style="width:5.625in;height:3.14733in" />
+<img src="_images/image2.jpg" style="width:5.625in;height:3.14733in" />
 
 How to use the mDGF?
 --------------------
@@ -297,7 +297,7 @@ How to use the mDGF?
 
 -   Follow the following steps to customize the framework for your project:
 
-    <img src="_images/overview.png" style="width:5.925in;height:3.14733in" />
+    <img src="_images/mDGF.png" style="width:5.925in;height:3.14733in" />
 
     -   Fork this repository via GitHub
         > [Fork Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
