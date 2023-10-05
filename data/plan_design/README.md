@@ -1,5 +1,4 @@
-**1.1 Planning and Design**
------------------------
+## **1.1 Planning and Design**
 
 <table>
     <thead>
@@ -32,9 +31,8 @@
                 <ul>
                     <li>
                         <p>The <a href="https://doi.org/10.5067/DOC/ESO/DPDG_QSG_VERSION1"><span
-                                    class="underline">EOSDIS Data Product Development Guide for Data Producers -
-                                    Quick Start Guide</span></a> prefers the following data formats: netCDF-4 and
-                            GeoTIFF.</p>
+                                    class="underline">EOSDIS Data Product Development Guide for Data Producers - Quick
+                                    Start Guide</span></a> prefers the following data formats: netCDF-4 and GeoTIFF.</p>
                     </li>
                     <li>
                         <p>Cloud Optimized GeoTIFF (COG) and Zarr are the preferred Cloud-based formats</p>
@@ -139,8 +137,8 @@
                 <p>Suggested:</p>
                 <ul>
                     <li>
-                        <p>Univariate visualization of each field in the raw dataset, with summary statistics and
-                            Fill Values, Mask Values</p>
+                        <p>Univariate visualization of each field in the raw dataset, with summary statistics and Fill
+                            Values, Mask Values</p>
                     </li>
                 </ul>
             </td>

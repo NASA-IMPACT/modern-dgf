@@ -1,5 +1,4 @@
-**2.2 Generation / Curation**
------------------------------
+## **2.2 Generation / Curation**
 
 <table>
     <thead>

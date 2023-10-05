@@ -1,5 +1,4 @@
-**5.1 Planning and Design**
----------------------------
+## **5.1 Planning and Design**
 
 <table>
     <thead>
@@ -22,11 +21,9 @@
                     storage for operations and backup/archive are require], projected growth, and estimated use[DE]</p>
                 <ul>
                     <li>
-                        <blockquote>
-                            <p><a
-                                    href="https://drive.google.com/file/d/1mLtWKImjQQixeZOWl0SVx7BkA_KXxBox/view?usp=share_link"><span
-                                        class="underline">ESDIS template</span></a></p>
-                        </blockquote>
+                        <p><a
+                                href="https://drive.google.com/file/d/1mLtWKImjQQixeZOWl0SVx7BkA_KXxBox/view?usp=share_link"><span
+                                    class="underline">ESDIS template</span></a></p>
                     </li>
                 </ul>
             </td>
@@ -53,19 +50,15 @@
                             class="underline">best practices document</span></a>. [DE]</p>
                 <ul>
                     <li>
-                        <blockquote>
-                            <p>If selected metrics show that the usage for a dataset is below a threshold, then the
-                                dataset should be moved to cold storage or deleted</p>
-                        </blockquote>
+                        <p>If selected metrics show that the usage for a dataset is below a threshold, then the
+                            dataset should be moved to cold storage or deleted</p>
                     </li>
                     <li>
-                        <blockquote>
-                            <p>Storage class can be changed manually (s3 cli) or by setting bucket specific rules. These
-                                rules or changes should be cost based (or time based) - need to determine at what usage
-                                it becomes more costly to store and retrieve from “colder” storage class versus keeping
-                                data in “warmer class” (i.e. &lt;~40% of total dataset egress it becomes cheaper to use
-                                IA vs standard storage)</p>
-                        </blockquote>
+                        <p>Storage class can be changed manually (s3 cli) or by setting bucket specific rules. These
+                            rules or changes should be cost based (or time based) - need to determine at what usage
+                            it becomes more costly to store and retrieve from “colder” storage class versus keeping
+                            data in “warmer class” (i.e. &lt;~40% of total dataset egress it becomes cheaper to use
+                            IA vs standard storage)</p>
                     </li>
                 </ul>
             </td>

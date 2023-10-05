@@ -1,5 +1,4 @@
-**4.6 Monitoring**
---------------
+## **4.6 Monitoring**
 
 <table>
     <thead>
@@ -44,8 +43,7 @@
         </tr>
         <tr class="even">
             <td>A4.6.2 Ensure users have access to the code</td>
-            <td>B4.6.2 Conduct periodic check of repositories through automated or manual means to ensure code is open
-                and accessible [DE]</td>
+            <td>B4.6.2 Conduct periodic check of repositories through automated or manual means to ensure code is open and accessible [DE]</td>
         </tr>
     </tbody>
 </table>

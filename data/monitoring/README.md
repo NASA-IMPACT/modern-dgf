@@ -1,5 +1,4 @@
-**1.6 Data Monitoring**
--------------------
+## **1.6 Data Monitoring**
 
 <table>
     <thead>
@@ -12,10 +11,8 @@
         <tr class="odd">
             <td>A1.6.1 Collect/monitor/report data usage metrics</td>
             <td>
-                <p>B1.6.1a Implement metrics collection procedures (see Requirement A1.1.13 for metrics implementation
-                    plan) [DE]</p>
-                <p>B1.6.1b Produce on a routine basis the metrics reports and distribute, quarterly reports recommended
-                    [DE]</p>
+                <p>B1.6.1a Implement metrics collection procedures (see Requirement A1.1.13 for metrics implementation plan) [DE]</p>
+                <p>B1.6.1b Produce on a routine basis the metrics reports and distribute, quarterly reports recommended [DE]</p>
                 <p>The same procedures also apply to A1.6.2 and A1.6.3</p>
             </td>
         </tr>
