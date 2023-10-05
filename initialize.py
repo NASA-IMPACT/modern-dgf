@@ -1,21 +1,22 @@
 import json
 import os
 import shutil
-import typer
-import requests
-import shutil
-
 from enum import Enum
+from typing import List, Optional
+
+import requests
+import typer
 from rich import print
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
-from typing import List, Optional
 
 try:
     from typing import Annotated, Literal
 except ImportError:
     from typing_extensions import Annotated, Literal
+
+import github_helper
 
 app = typer.Typer(
     help="CLI to tailor the mDGF framework to your project-specific needs."
