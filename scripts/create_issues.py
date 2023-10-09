@@ -6,6 +6,7 @@ import pandas as pd
 import tqdm
 
 import github_helper
+from config import ENTITIY_FOLDERS
 
 
 def get_subfolders(folder):
@@ -43,29 +44,30 @@ def split_procedures_by_id(procedures):
     return [i.strip() for i in procedures if i]
 
 
-folder_list = [
-    "code",
-    "data",
-    "digital_content",
-    "metadata",
-    "resources/people/",
-    "resources/storage/",
-]
+def main():
+    proper_repo_name = github_helper.prepare_github_cli()
 
-for folder in tqdm.tqdm(folder_list):
-    for subfolder in get_subfolders(folder):
-        df = extract_data_from_readme(subfolder)
+    for folder in tqdm.tqdm(ENTITIY_FOLDERS):
+        folder = f"../{folder}"
+        if not (os.path.exists(folder)):
+            continue
+        for subfolder in get_subfolders(folder):
+            df = extract_data_from_readme(subfolder)
 
-        if df is not None:
-            for _, row in df.iterrows():
-                description, procedures = row.iloc[0], row.iloc[1]
+            if df is not None:
+                for _, row in df.iterrows():
+                    description, procedures = row.iloc[0], row.iloc[1]
 
-                if isinstance(procedures, str):
-                    procedures_list = split_procedures_by_id(procedures)
-                    for procedure in procedures_list:
-                        github_helper.create_issues(
-                            "code-geek/dgf-playground",
-                            title=procedure,
-                            body=description,
-                        )
-                        time.sleep(5)
+                    if isinstance(procedures, str):
+                        procedures_list = split_procedures_by_id(procedures)
+                        for procedure in procedures_list:
+                            github_helper.create_issues(
+                                proper_repo_name,
+                                title=procedure,
+                                body=description,
+                            )
+                            time.sleep(5)
+
+
+if __name__ == "__main__":
+    main()
