@@ -65,13 +65,17 @@ def batch_run_bulk_compliance_checker(
             enum_statements.append(batch_statement)
 
     logger.info(f"Running bulk_compliance_checker with {len(enum_policies)} batches")
-    results.extend(
-        itertools.chain.from_iterable(
-            bulk_compliance_checker.map(
-                policies=enum_policies, statements=enum_statements
+    try:
+        results.extend(
+            itertools.chain.from_iterable(
+                bulk_compliance_checker.map(
+                    policies=enum_policies, statements=enum_statements
+                )
             )
         )
-    )
+    except Exception as e:
+        logger.error(f"Error running bulk_compliance_checker: {e}")
+
     logger.info(f"finished running bulk_compliance_checker with {len(results)} results")
     return results
 
