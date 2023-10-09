@@ -1,15 +1,16 @@
 import json
 import os
-import shutil
-from enum import Enum
-from typing import List, Optional
-
 import requests
+import shutil
 import typer
+
+from config import ENTITIES, ENTITIY_FOLDERS
+from enum import Enum
 from rich import print
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
+from typing import List, Optional
 
 try:
     from typing import Annotated, Literal
@@ -23,17 +24,6 @@ app = typer.Typer(
 )
 
 console = Console()
-
-ENTITIES = ["Data", "Metadata", "Digital Content", "Code", "Storage", "People"]
-
-ENTITIY_FOLDERS = [
-    "data",
-    "metadata",
-    "digital_content",
-    "code",
-    "resources/storage",
-    "resources/people",
-]
 
 ENTITIES_PROMPT = (
     "Provide the comma separated IDs of entities applicable to your project:"
