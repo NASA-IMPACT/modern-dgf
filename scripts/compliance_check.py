@@ -249,10 +249,10 @@ def compliance_check(n_comparisions: int = 10, debug: bool = False):
 
 
 if __name__ == "__main__":
-    compiled_results = compliance_check()
-    for policy_type, results in compiled_results:
+    compiled_results = compliance_check(n_comparisions=10, debug=True)
+    for policy_type, results in compiled_results.items():
         headers = [f"{policy_type} Requirements", "DGF requirements"]
         values = []
-        for key, value in results:
+        for key, value in results.items():
             values.append([key, value])
         tabulate(values, headers=headers, tablefmt="grid")
