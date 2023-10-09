@@ -1,28 +1,22 @@
 import itertools
 import json
+import marvin
 import os
 import re
-from glob import glob
-from typing import List
 
-import marvin
 from bs4 import BeautifulSoup
+from config import ENTITIY_FOLDERS
+from glob import glob
 from loguru import logger
 from marvin import ai_fn
 from pydantic import BaseModel
+from tabulate import tabulate
+from typing import List
 
-DGF_FOLDER_NAMES = [
-    "code",
-    "data",
-    "digital_content",
-    "metadata",
-    "resources/people",
-    "resources/storage",
-]
 
 COMPLIANCE_CHECK_FOLDER = {
     "SPD41a": "alignments/SPD-41a",
-    # "FAIR": "alignments/FAIR",
+    "FAIR": "alignments/FAIR",
 }
 
 
@@ -31,7 +25,7 @@ class compliant_statements(BaseModel):
     statements: list[str]
 
 
-marvin.settings.openai.api_key = "<API-KEY>"
+marvin.settings.openai.api_key = os.environ.get("API_KEY")
 
 
 # @ai_fn
@@ -40,7 +34,7 @@ def bulk_compliance_checker(
     policies: list[str], statements: list[str]
 ) -> list[compliant_statements]:
     """
-    for each policy given, find the statements that DIRECTLY support and compliant with the policy.
+    For each policy given, find the statements that DIRECTLY support and compliant with the policy.
     e.g: if policy is "Data shall be made publicly available, free in open, machine-readable formats [III.C.ii–iv]"
     a compliant statement for the above policy is A1.1.3 Adhere to community accepted standard machine readable data file formats
     a non-compliant statement for the above policy is A1.1.6  Adhere to community standard variable names, types, and unit(s), keywords
@@ -164,7 +158,9 @@ def parse_markdown_file_table(
 
 def run_dgf_extractions(save_file: str = None):
     dgf_dict = {}
-    for dgf_folder in DGF_FOLDER_NAMES:
+    for dgf_folder in ENTITIY_FOLDERS:
+        if not (os.path.exists(dgf_folder)):
+            continue
         readme_files_loc = os.path.join(
             os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
             dgf_folder,
@@ -243,5 +239,10 @@ def compliance_check(n_comparisions: int = 10, debug: bool = False):
 
 
 if __name__ == "__main__":
-    results = compliance_check()
-    json.dump(results, open("compliance_check_results.json", "w"), indent=4)
+    compiled_results = compliance_check()
+    for policy_type, results in compiled_results:
+        headers = [f"{policy_type} Requirements", "DGF requirements"]
+        values = []
+        for key, value in results:
+            values.append([key, value])
+        tabulate(values, headers=headers, tablefmt="grid")
