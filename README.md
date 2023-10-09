@@ -348,10 +348,7 @@ How to use the mDGF?
     
     > Note: This step will utilize GitHub cli tool. If it is currently not installed in the system, please visit https://cli.github.com/ and install and initialize GitHub cli.
 
-- Coming Next week
-
-    -   Perform a quick compliance check against the different policies (SPD-41a, FAIR) using Artificial Intelligence (Coming Next week).
-    
+- Coming Up Next
     -   Subselection prepared as a document which will serve as your DMP
 
 ## Contribution
