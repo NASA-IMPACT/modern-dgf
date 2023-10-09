@@ -223,9 +223,16 @@ def compliance_check(n_comparisions: int = 10, debug: bool = False):
             n_times += 1
             for subsection in dgf_dict[section].keys():
                 for dgf_requirement, dgf_procedure in dgf_dict[section][subsection]:
-                    dgf_requirements.append(
-                        f"Requirement: {dgf_requirement} | Procedure: {dgf_procedure}"  # noqa: E501
+                    # remove double quotes from dgf_requirement and change to single quotes
+                    dgf_requirement_procedure = f"Requirement: {dgf_requirement} | Procedure: {dgf_procedure}"  # noqa: E501
+                    dgf_requirement_procedure = (
+                        dgf_requirement_procedure.replace("”", '"')
+                        .replace("“", '"')
+                        .replace("’", '"')
+                        .replace("‘", '"')
                     )
+
+                    dgf_requirements.append(dgf_requirement_procedure)
         logger.info(
             f"Running compliance check for {policy_type} with {len(policy_items)} policies and {len(dgf_requirements)} requirements"
         )
