@@ -332,13 +332,21 @@ How to use the mDGF?
             
             > `git push origin main`. This will push your changes into GitHub. However, it is highly recommended to use branches and pull requests to make any changes. [Read more.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
+-   If you need to re-start from base mDGF, you can use `git checkout -- .` in your command line. 
+    > Note: This will remove all the changes you might have made to any files! 
+
 ## Work in progress
         
--   Additonally, you can also choose to create GitHub issues based on the selections made. Additional parameters are required for GitHub issues to be created.
+-   After all the changes to the documents are made, you can check if the modifications/selections are compliant with SPD-41a, and FAIR using the following command:
         
-    > `GITHUB_REPO=<new GitHub Repo name> GITHUB_OWNER=<organization/user handle> GITHUB_AUTH_KEY=<GitHub Authorization Key> python initialize.py`
+    > `API_KEY=<OPEN-AI Key> python scripts/compliance_check.py`
 
-    > GitHub Auth Key can be obtained via [GitHub settings](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+    > Note: This process utilizes Large Language Model (LLM), specifically GPT-4, to prepare the compliance check report. So, please replace <OPEN-AI key> with your API key. If you do not have one, you can [generate one](https://www.maisieai.com/help/how-to-get-an-openai-api-key-for-chatgpt)
+
+- After all the customizations and sub-selections are done, GitHub Issues can be automatically created based on the customizations and sub-selections made for projects using the following command:
+    > `python scripts/create_issues.py`
+    
+    > Note: This step will utilize GitHub cli tool. If it is currently not installed in the system, please visit https://cli.github.com/ and install and initialize GitHub cli.
 
 - Coming Next week
 
