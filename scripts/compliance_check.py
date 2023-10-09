@@ -161,7 +161,7 @@ def run_dgf_extractions(save_file: str = None):
         if not (os.path.exists(dgf_folder)):
             continue
         readme_files_loc = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
+            os.path.dirname(os.path.dirname(__file__)),
             dgf_folder,
         )
         dgf_dict[dgf_folder] = {}
@@ -178,7 +178,7 @@ def run_policy_extractions(save_file: str = None):
     compliance_check_dict = {}
     for policy in COMPLIANCE_CHECK_FOLDER.keys():
         readme_files_loc = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
+            os.path.dirname(os.path.dirname(__file__)),
             COMPLIANCE_CHECK_FOLDER[policy],
         )
         compliance_check_dict[policy] = {}
