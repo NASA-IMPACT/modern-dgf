@@ -1,18 +1,17 @@
 import itertools
 import json
-import marvin
 import os
 import re
+from glob import glob
+from typing import List
 
+import marvin
 from bs4 import BeautifulSoup
 from config import ENTITIY_FOLDERS
-from glob import glob
 from loguru import logger
 from marvin import ai_fn
 from pydantic import BaseModel
 from tabulate import tabulate
-from typing import List
-
 
 COMPLIANCE_CHECK_FOLDER = {
     "SPD41a": "alignments/SPD-41a",
