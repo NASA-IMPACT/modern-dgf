@@ -1,17 +1,20 @@
 import itertools
 import json
+import marvin
 import os
 import re
-from glob import glob
-from typing import List
 
-import marvin
 from bs4 import BeautifulSoup
 from config import ENTITIY_FOLDERS
+from glob import glob
 from loguru import logger
 from marvin import ai_fn
 from pydantic import BaseModel
+from rich.console import Console
+from rich.table import Table
 from tabulate import tabulate
+from typing import List
+
 
 COMPLIANCE_CHECK_FOLDER = {
     "SPD41a": "alignments/SPD-41a",
@@ -180,7 +183,7 @@ def run_dgf_extractions(save_file: str = None):
 
 def run_policy_extractions(save_file: str = None):
     compliance_check_dict = {}
-    for policy in COMPLIANCE_CHECK_FOLDER.keys():
+    for policy in COMPLIANCE_CHECK_FOLDER:
         readme_files_loc = os.path.join(
             os.path.dirname(os.path.dirname(__file__)),
             COMPLIANCE_CHECK_FOLDER[policy],
@@ -225,11 +228,14 @@ def compliance_check(n_comparisions: int = 10, debug: bool = False):
                 for dgf_requirement, dgf_procedure in dgf_dict[section][subsection]:
                     # remove double quotes from dgf_requirement and change to single quotes
                     dgf_requirement_procedure = f"Requirement: {dgf_requirement} | Procedure: {dgf_procedure}"  # noqa: E501
-                    dgf_requirement_procedure = (
-                        dgf_requirement_procedure.replace("”", '"')
-                        .replace("“", '"')
-                        .replace("’", '"')
-                        .replace("‘", '"')
+                    dgf_requirement_procedure = dgf_requirement_procedure.replace(
+                        "”",
+                        """)
+                        .replace("“", """,
+                    ).replace(
+                        "’",
+                        """)
+                        .replace("‘", """,
                     )
 
                     dgf_requirements.append(dgf_requirement_procedure)
@@ -250,9 +256,17 @@ def compliance_check(n_comparisions: int = 10, debug: bool = False):
 
 if __name__ == "__main__":
     compiled_results = compliance_check(n_comparisions=10, debug=True)
+    console = Console()
     for policy_type, results in compiled_results.items():
-        headers = [f"{policy_type} Requirements", "DGF requirements"]
+        print(policy_type, results)
+        table = Table(f"{policy_type} Requirements", "DGF requirements")
         values = []
-        for key, value in results.items():
-            values.append([key, value])
-        tabulate(values, headers=headers, tablefmt="grid")
+        if type(results) == dict:
+            for key, internal_values in results.items():
+                # for key, internal_values in result.items():
+                table.add_row(key, ",".join(internal_values))
+        else:
+            for result in results:
+                for key, internal_values in result.items():
+                    table.add_row(key, ",".join(internal_values))
+        console.print(table)
