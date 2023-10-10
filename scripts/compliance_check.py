@@ -258,7 +258,6 @@ if __name__ == "__main__":
     compiled_results = compliance_check(n_comparisions=10, debug=True)
     console = Console()
     for policy_type, results in compiled_results.items():
-        print(policy_type, results)
         table = Table(f"{policy_type} Requirements", "DGF requirements")
         values = []
         if type(results) == dict:
