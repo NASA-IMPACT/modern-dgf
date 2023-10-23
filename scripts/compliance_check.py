@@ -27,7 +27,7 @@ class compliant_statements(BaseModel):
     statements: list[str]
 
 
-marvin.settings.openai.api_key = os.environ.get("API_KEY")
+marvin.settings.openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 
 # @ai_fn
