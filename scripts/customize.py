@@ -1,10 +1,10 @@
 import json
 import os
-import shutil
-import typer
 import requests
 import shutil
+import typer
 
+from config import ENTITIES, ENTITIY_FOLDERS
 from enum import Enum
 from rich import print
 from rich.console import Console
@@ -17,21 +17,21 @@ try:
 except ImportError:
     from typing_extensions import Annotated, Literal
 
+import github_helper
+
 app = typer.Typer(
     help="CLI to tailor the mDGF framework to your project-specific needs."
 )
 
 console = Console()
 
-ENTITIES = ["Data", "Metadata", "Digital Content", "Code", "Storage", "People"]
-
-ENTITIY_FOLDERS = ['data', 'metadata', 'digital_content', 'code', 'resources/storage', 'resources/people']
-
-ENTITIES_PROMPT = "Provide the comma separated IDs of entities applicable to your project:"
+ENTITIES_PROMPT = (
+    "Provide the comma separated IDs of entities applicable to your project:"
+)
 
 FOUNDATIONAL_CODES = [1, 6]
 
-GITHUB_URL = 'https://api.github.com/repos/{owner}/{repo_name}/issues'
+GITHUB_URL = "https://api.github.com/repos/{owner}/{repo_name}/issues"
 
 INFO = """There are two steps to customizing the framework for your project. 
 1. Selection of entities applicable to your project
@@ -55,7 +55,14 @@ PHASES = [
     "Preservation",
     "Monitoring",
 ]
-PHASES_FOLDERS = ['plan_design', 'generation_curation', 'sharing', 'use_reuse', 'preservation', 'monitoring']
+PHASES_FOLDERS = [
+    "plan_design",
+    "generation_curation",
+    "sharing",
+    "use_reuse",
+    "preservation",
+    "monitoring",
+]
 
 PHASES_PROMPT = "Provide the IDs of Phases applicable to {entity}:"
 
@@ -101,29 +108,43 @@ class ValidCodeOptions(Enum):
     OPTION_6_1 = "6.1"
 
 
-def formatted_part(parts: list, entity_code: str = '') -> list:
+def formatted_part(parts: list, entity_code: str = "") -> list:
     if ValidCodeOptions.OPTION_all.value in parts:
         # Change this to use ENUMs
-        parts = [str(index) for index in range(1, 7)]    
-    return [f'{entity_code}.{part.strip()}' if entity_code else part.strip() for part in parts]
+        parts = [str(index) for index in range(1, 7)]
+    return [
+        f"{entity_code}.{part.strip()}" if entity_code else part.strip()
+        for part in parts
+    ]
 
-def is_valid(code: str, entity_code: str = '') -> bool:
-    parts = code.split(',')
-    val = [f"{entity_code}.{part.strip().replace('-', '')}" if entity_code else part.strip().replace('-', '') in ValidCodeOptions._value2member_map_ for part in parts]
+
+def is_valid(code: str, entity_code: str = "") -> bool:
+    parts = code.split(",")
+    val = [
+        f"{entity_code}.{part.strip().replace('-', '')}"
+        if entity_code
+        else part.strip().replace("-", "") in ValidCodeOptions._value2member_map_
+        for part in parts
+    ]
     return all(val)
 
-def parse_options(code: str, entity_code: str = '') -> List[str]:
+
+def parse_options(code: str, entity_code: str = "") -> List[str]:
     parts = code.split(",")
     return formatted_part(parts, entity_code)
 
+
 def prepare_final_phase_list(entity_code: str, phase_list: list) -> list:
-    required_phases = [f"{entity_code}.{foundational_code}" for foundational_code in FOUNDATIONAL_CODES]
+    required_phases = [
+        f"{entity_code}.{foundational_code}" for foundational_code in FOUNDATIONAL_CODES
+    ]
     final_phases = list(set(phase_list).union(set(required_phases)))
 
     if entity_code == ValidCodeOptions.OPTION_6.value:
         final_phases = [f"{entity_code}.{FOUNDATIONAL_CODES[0]}"]
-    
+
     return final_phases
+
 
 def _get_table():
     table = Table("Entities \u2193 / Phases \u2192", *PHASES)
@@ -137,13 +158,14 @@ def _get_table():
         table.add_row(f"{index}. {entity}", *codes)
     return table
 
+
 def make_github_issue(title: str):
-    '''Create an issue on github using the given parameters.'''
-    auth_key = os.environ.get('GITHUB_AUTH_KEY')
-    if not(auth_key):
+    """Create an issue on github using the given parameters."""
+    auth_key = os.environ.get("GITHUB_AUTH_KEY")
+    if not (auth_key):
         return
-    owner = os.environ.get('GITHUB_OWNER')
-    repo_name = os.environ.get('GITHUB_REPO')
+    owner = os.environ.get("GITHUB_OWNER")
+    repo_name = os.environ.get("GITHUB_REPO")
 
     headers = {
         "Accept": "application/vnd.github+json",
@@ -152,32 +174,41 @@ def make_github_issue(title: str):
     }
     # Create our issue
     issue = {
-        'title': title,
-        'body': title,
+        "title": title,
+        "body": title,
     }
     # Add the issue to our repository
-    response = requests.post(GITHUB_URL.format(owner, repo_name), headers=headers, data=json.dumps(issue))
+    response = requests.post(
+        GITHUB_URL.format(owner, repo_name), headers=headers, data=json.dumps(issue)
+    )
     if response.status_code == 201:
         print(f"Successfully created Issue {title}")
     else:
         print(f"Could not create Issue {title}")
 
+
 def prepare_directories(valid_entities_and_phases: dict):
     for entity_code, entity in enumerate(ENTITIY_FOLDERS, 1):
         if phases := valid_entities_and_phases.get(f"{entity_code}"):
-            console.print(f"Keep Entity: {entity}" )
+            console.print(f"Keep Entity: {entity}")
             for phase_index, phase in enumerate(PHASES_FOLDERS, 1):
-                if entity_code == int(ValidCodeOptions.OPTION_6.value) and phase_index > 1:
+                if (
+                    entity_code == int(ValidCodeOptions.OPTION_6.value)
+                    and phase_index > 1
+                ):
                     continue
                 if f"{entity_code}.{phase_index}" in phases:
                     console.print(f"    Keep Phase: {phase}")
-                    make_github_issue("Ensure compliance for entity: {entity}, phase: {phase}")
+                    make_github_issue(
+                        "Ensure compliance for entity: {entity}, phase: {phase}"
+                    )
                 else:
                     console.print(f"    Remove Phase: {phase}")
-                    shutil.rmtree(f'{entity}/{phase}')
+                    shutil.rmtree(f"{entity}/{phase}")
         else:
-            console.print(f"Remove Entity: {entity}" )
+            console.print(f"Remove Entity: {entity}")
             shutil.rmtree(entity)
+
 
 @app.command()
 def wizard():
@@ -186,27 +217,28 @@ def wizard():
     """
 
     welcome_message = typer.style(
-        "\nWelcome to the Modern Data Governance framework wizard!\n", fg=typer.colors.GREEN, bold=True
+        "\nWelcome to the Modern Data Governance framework wizard!\n",
+        fg=typer.colors.GREEN,
+        bold=True,
     )
     typer.echo(welcome_message)
-    
-    information = typer.style(
-        INFO, fg=typer.colors.YELLOW
-    )
+
+    information = typer.style(INFO, fg=typer.colors.YELLOW)
 
     typer.echo(information)
 
     typer.echo("Below you will find a table of all steps in the mDGF framework.\n")
 
     console.print(_get_table())
-    
+
     entities_selected = Prompt.ask(ENTITIES_PROMPT, default="all")
 
     print(entities_selected)
 
     while not is_valid(entities_selected):
         entities_selected = Prompt.ask(
-            "Invalid selection. Please enter values listed in the table above.\n", default="all"
+            "Invalid selection. Please enter values listed in the table above.\n",
+            default="all",
         )
 
     valid_entities = parse_options(entities_selected)
@@ -216,12 +248,16 @@ def wizard():
         phases_selected = Prompt.ask(PHASES_PROMPT.format(entity=entity), default="all")
         while not is_valid(phases_selected, entity):
             phases_selected = Prompt.ask(
-                f"Invalid selection. Please enter proper for phases of {entity} listed in the table above.\n", default="all"
+                f"Invalid selection. Please enter proper for phases of {entity} listed in the table above.\n",
+                default="all",
             )
-        phase_list = prepare_final_phase_list(entity, parse_options(phases_selected, entity))
+        phase_list = prepare_final_phase_list(
+            entity, parse_options(phases_selected, entity)
+        )
         valid_entities_and_phases[entity] = phase_list
     print(valid_entities_and_phases)
     prepare_directories(valid_entities_and_phases)
+
 
 if __name__ == "__main__":
     app()

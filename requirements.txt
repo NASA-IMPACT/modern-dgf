@@ -1,2 +1,11 @@
-typer-cli==0.0.13
+beautifulsoup4==4.12.2
+html5lib==1.1
+lxml==4.9.3
+pandas==2.1.1
+requests==2.31.0
 rich==12.6.0
+tqdm==4.66.1
+tabulate==0.8.10
+loguru==0.7.2
+marvin==1.5.1
+pydantic-settings==2.0.3
